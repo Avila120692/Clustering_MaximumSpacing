@@ -1,4 +1,5 @@
 /* Node Class implementation */
+
 #include <windows.h>
 #include <GL/gl.h>
 #include "glut.h"
@@ -6,7 +7,6 @@
 
 // Constructor
 Node::Node(GLfloat radius){
-
 	this->radius = radius;
 }
 

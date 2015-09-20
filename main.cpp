@@ -7,7 +7,9 @@
 using namespace std;
 
 // Create generator
-Generator random_generator();
+Generator generator();
+
+generator.generateNodes(10);
 
 void init(void){
 	// Set clear (background) color
@@ -47,6 +49,8 @@ void init(void){
 void display(void){
 	// Clear the buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	random_generator.
 
 	// glFlush — Force execution of GL commands in finite time
 	glFlush();
