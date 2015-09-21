@@ -11,7 +11,8 @@
 class Generator {
 
 public:
-	Generator();
+	int random_factor;
+	Generator(int random_factor);
 	~Generator();
 	void generateNodes(int n);
 };

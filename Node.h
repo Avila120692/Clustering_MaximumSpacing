@@ -15,11 +15,14 @@ public:
 	GLfloat y;
 	GLfloat z;
 	GLfloat radius;
-	GLfloat material_surface[];
-	Node(GLfloat radius);
+	GLfloat demi_radius;
+	GLfloat surface;
+	GLfloat color_surface [3];
+	Node(GLfloat radius, GLfloat surface);
 	~Node();
 	void setPosition(GLfloat x, GLfloat y, GLfloat z);
-	void setMaterial(GLfloat R, GLfloat G, GLfloat B, GLfloat A);
+	void setColor(GLfloat R, GLfloat G, GLfloat B);
+	void draw(void);
 	void drawBody(void);
 };
 

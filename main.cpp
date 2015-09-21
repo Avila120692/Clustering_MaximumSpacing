@@ -7,52 +7,64 @@
 using namespace std;
 
 // Create generator
-Generator generator();
-
-generator.generateNodes(10);
+Generator random_generator(1);
 
 void init(void){
 	// Set clear (background) color
 	glClearColor(0.0, 0.0, 0.0, 0.0);
+}
 
-	// Define material properties
-	GLfloat mat_specular[] = { 3.0, 3.0, 3.0, 3.0 };
-	GLfloat mat_shininess[] = { 30.0 };
-	GLfloat mat_surface[] = { 1.0, 1.0, 0.0, 0.0 };
+// Draw an axis with a cone at the end : From CG using OpenGL - Hill and Kelley
+void drawAxis(double length) {
+	glPushMatrix();
 
-	// Set material properties, as defined above
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
-	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_surface);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_surface);
+	// Draw line
+	glBegin(GL_LINES);
+	glVertex3d(0.0, 0.0, 0.0);
+	glVertex3d(0.0, 0.0, length);
+	glEnd();
 
-	// Set light properties ... What ?
-	GLfloat white_light[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat light_position0[] = { 0.0, 0.0, 0.0, 1.0 };
-
-	// Finish setting up the two lights (position, and component values (specular and diffuse))
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, white_light);
-
-	// Set shading model to use
-	glShadeModel(GL_SMOOTH);
-
-	// Enable lighting
-	glEnable(GL_LIGHTING);
-	// Activate (enable) lights
-	glEnable(GL_LIGHT0);
-	// Enable depth testing (for hidden surface removal)
-	glEnable(GL_DEPTH_TEST);
+	// Draw cone
+	glTranslated(0.0, 0.0, length - 0.2);
+	glutSolidCone(0.04, 0.2, 12, 9);
+	
+	glPopMatrix();
 }
 
 void display(void){
 	// Clear the buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glColor3f(255.0, 255.0, 0.0);
 
-	random_generator.
+	// ----------------------------------------------------
+	// Draw reference frame
+	glLineWidth(1.0);
 
-	// glFlush — Force execution of GL commands in finite time
+	// Z axis
+	glColor3f(1.0, 0.0, 0.0);
+	drawAxis(3.0);
+
+	// X axis
+	glColor3f(0.0, 1.0, 0.0);
+	glPushMatrix();
+	glRotated(90.0, 0.0, 1.0, 0.0);
+	drawAxis(3.0);
+	glPopMatrix();
+
+	// Y axis
+	glColor3f(0.0, 0.0, 1.0);
+	glPushMatrix();
+	glRotated(-90.0, 1.0, 0.0, 0.0);
+	drawAxis(2.5);
+	glPopMatrix();
+	// -----------------------------------------------------
+
+	// Generate nodes
+	random_generator.generateNodes(20);
+
+	// -----------------------------------------------------
+
+	// Force execution of GL commands in finite time
 	glFlush();
 }
 
@@ -67,9 +79,10 @@ void reshape(int w, int h){
 	glLoadIdentity();
 
 	// Set the "look at" point
-	gluLookAt(0.0, 5.0, 20.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	gluLookAt(3.0, 3.0, 4.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 }
 
+// We will have some sort of cotnrol with the keyboard
 void keyboard(unsigned char key, int x, int y){
 	switch (key) {
 	case 27:
@@ -77,6 +90,13 @@ void keyboard(unsigned char key, int x, int y){
 		break;
 	}
 }
+
+// We will have some sort of cotnrol with the mouse as well
+void mouse(int btn, int state, int x, int y) {
+}
+
+// We need to have a GUI for controlling : amount of nodes, randomness level, amount of clusters, color for thr clusters...
+// Also, we need to display the time it took the algortihm to calculate the clusters
 
 int main(int argc, char** argv){
 
@@ -90,6 +110,7 @@ int main(int argc, char** argv){
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
+	glutMouseFunc(mouse);
 
 	init();
 	glutMainLoop();
