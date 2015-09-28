@@ -13,54 +13,57 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Implementations">
+      <UniqueIdentifier>{030a7bda-9d8f-4031-97e8-027ec307439a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interfaces">
+      <UniqueIdentifier>{4e5a3352-5c18-4fc2-9e19-2f68714eecb7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Node.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Generator.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KCluster.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UFNode.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Edge.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UnionFind.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Edge.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="UFNode.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="UnionFind.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="KCluster.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Generator.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Generator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UFNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Edge.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Generator.cpp">
+      <Filter>Source Files\Implementations</Filter>
     </ClCompile>
     <ClCompile Include="KCluster.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="UFNode.cpp">
+      <Filter>Source Files\Implementations</Filter>
     </ClCompile>
     <ClCompile Include="UnionFind.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main2.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Implementations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

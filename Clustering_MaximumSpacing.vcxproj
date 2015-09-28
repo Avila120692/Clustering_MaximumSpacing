@@ -78,7 +78,6 @@
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="KCluster.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="main2.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="UFNode.cpp" />
     <ClCompile Include="UnionFind.cpp" />

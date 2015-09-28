@@ -47,14 +47,17 @@ int KCluster::getMaxSpacing(int clusterCount) {
 
 void KCluster::addEdges(Edge* edges){
 
-	for (int i = 0; i < mNumEdges; i++)
-		mEdgeList[i] = edges[i];
+	for (int i = 0; i < mNumEdges; i++){
+		printf("\nEdge [%i] : src[%i] - dest[%i] | weight[%i]", i, edges[i].src, edges[i].dest, edges[i].weight);
+		//mEdgeList[i] = edges[i];
+	}
 }
 
 void KCluster::print() {
 
-	for (int i = 0; i < mNumEdges; i++)
-		printf("\nEdge [%i] : src[%i] - dest[&i] | weight[%i]", mEdgeList[i].src, mEdgeList[i].dest, mEdgeList[i].weight);
+	for (int i = 0; i < mNumEdges; i++){
+		//printf("\nEdge [%i] : src[%i] - dest[%i] | weight[%i]", i, mEdgeList[i].src, mEdgeList[i].dest, mEdgeList[i].weight);
+	}
 }
 
 // Destructor
