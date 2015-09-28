@@ -1,10 +1,9 @@
 /* KCluster class dimplementation*/
-#include <windows.h>
+using namespace std;
 #include <algorithm>
 #include "Edge.h"
+#include "UnionFind.h"
 #include "KCluster.h"
-
-using namespace std;
 
 // Constructor 
 KCluster::KCluster(int numVertices, int numEdges) {
@@ -17,7 +16,7 @@ KCluster::KCluster(int numVertices, int numEdges) {
 // Main method for getting the Max spacing
 int KCluster::getMaxSpacing(int clusterCount) {
 
-	sort(mEdgeList, mEdgeList + (mNumEdges*sizeof(Edge)));
+	//sort(mEdgeList, mEdgeList + (mNumEdges*sizeof(Edge)));
 
 	UnionFind uf(mNumVertices);
 
@@ -57,3 +56,6 @@ void KCluster::print() {
 	for (int i = 0; i < mNumEdges; i++)
 		printf("\nEdge [%i] : src[%i] - dest[&i] | weight[%i]", mEdgeList[i].src, mEdgeList[i].dest, mEdgeList[i].weight);
 }
+
+// Destructor
+KCluster::~KCluster(){}

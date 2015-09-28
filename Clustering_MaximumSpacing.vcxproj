@@ -65,13 +65,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Edge.h" />
     <ClInclude Include="Generator.h" />
+    <ClInclude Include="KCluster.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="UFNode.h" />
+    <ClInclude Include="UnionFind.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Generator.cpp" />
+    <ClCompile Include="KCluster.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="main2.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="UFNode.cpp" />
+    <ClCompile Include="UnionFind.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Clustering_MaximumSpacing.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

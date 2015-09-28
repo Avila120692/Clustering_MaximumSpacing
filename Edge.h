@@ -1,6 +1,5 @@
 /* Edge class definition*/
-#include <windows.h>
-#include "UnionFind.h"
+using namespace std;
 #include <cstring>
 
 #ifndef __EDGE__

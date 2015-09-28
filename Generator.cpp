@@ -1,4 +1,5 @@
 /* Generator Class implementation */
+using namespace std;
 
 #include <windows.h>
 #include <GL/gl.h>
@@ -9,7 +10,6 @@
 
 const GLfloat node_radius = 0.1;
 const GLfloat node_surface = 0.8;
-
 
 // Constructor
 Generator::Generator(int random_factor){

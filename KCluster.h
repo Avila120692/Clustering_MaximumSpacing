@@ -1,5 +1,6 @@
 /* KCluster class definition*/
-#include <windows.h>
+using namespace std;
+
 #include "Edge.h"
 
 #ifndef __KCLUSTER__

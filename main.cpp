@@ -110,7 +110,7 @@ int main(int argc, char** argv){
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
-	//glutMouseFunc(mouse);
+	glutMouseFunc(mouse);
 
 	init();
 	glutMainLoop();

@@ -1,5 +1,5 @@
 /* UnionFind class definition*/
-#include <windows.h>
+using namespace std;
 #include "UFNode.h"
 
 #ifndef __UNIONFIND__

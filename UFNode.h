@@ -1,25 +1,17 @@
-/* KCluster class definition*/
-#include <windows.h>
-#include "Edge.h"
+/* UFnode class definition*/
 
-#ifndef __KCLUSTER__
+#ifndef __UFNode__
 
-#define __KCLUSTER__
+#define __UFNode__
 
-class KCluster {
-
-private:
-	int mNumVertices;   // Number of vertices in the graph
-	int mNumEdges;  // Number of edges in the graph
-	Edge* mEdgeList;
+class UFNode {
 
 public:
-	int maxClusterDistance; // for K cluster
-	KCluster(int numVertices, int numEdges);
-	~KCluster();
-	int getMaxSpacing(int clusterCount);
-	void addEdges(Edge* edges);
-	void print();
+	int parent;
+	int rank;
+	UFNode(int parent, int rank);
+	~UFNode();
+
 };
 
 #endif

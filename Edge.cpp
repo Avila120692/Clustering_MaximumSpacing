@@ -1,4 +1,5 @@
 /* Edge class implementation*/
+using namespace std;
 
 #include <windows.h>
 #include <stdio.h>
@@ -22,3 +23,6 @@ void Edge::toString() {
 int Edge::compareTo(Edge* another){
 	return (this->weight - another->weight);
 }
+
+// Destructor
+Edge::~Edge(){}

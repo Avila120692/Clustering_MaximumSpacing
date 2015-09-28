@@ -1,4 +1,5 @@
 /*UnionFind class implementation*/
+using namespace std;
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -59,3 +60,6 @@ bool UnionFind::isConnected(int v1, int v2) {
 void UnionFind::printCluster(){
 	printf("%s \n", "We are printing here");
 }
+
+// Destructor
+UnionFind::~UnionFind(){}

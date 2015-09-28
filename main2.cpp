@@ -1,10 +1,11 @@
+using namespace std;
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
+#include "Edge.h"
 #include "KCluster.h"
-
-using namespace std;
 
 Edge* generateEdges(){
 
@@ -27,8 +28,9 @@ Edge* generateEdges(){
 	return *edges;
 }
 
-int main(void)
+int main2(void)
 {
+	/*
 	Edge* edges = generateEdges();
 
 	KCluster graph(9, 13);
@@ -36,7 +38,6 @@ int main(void)
 	graph.addEdges(edges);
 	graph.print();
 
-	/*
 	graph.maxClusterDistance = graph.getMaxSpacing(k);
 
 	if (graph.maxClusterDistance != -1)
