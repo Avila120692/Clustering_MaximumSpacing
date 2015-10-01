@@ -51,7 +51,7 @@ void display(void){
 	// Draw enviroment (axis, reference frame, background texture, parallax effect)
 	helper.drawGraphicEnviroment();
 
-	// Draw graph (all edges)
+	// Draw original graph (all edges)
 	graph.draw();
 
 	// Execute clustering algorithm
