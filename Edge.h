@@ -1,6 +1,7 @@
 /* Edge class definition*/
+#include <iostream>
+
 using namespace std;
-#include <cstring>
 
 #ifndef __EDGE__
 
@@ -15,7 +16,7 @@ public:
 	Edge(int src, int dest, int weight);
 	~Edge();
 	void toString(); // check method
-	int compareTo(Edge* another);
+	int compareTo(Edge another);
 };
 
 #endif

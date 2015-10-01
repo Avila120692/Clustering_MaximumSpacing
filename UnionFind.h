@@ -1,6 +1,9 @@
 /* UnionFind class definition*/
-using namespace std;
+#include <vector>
+#include <map>
 #include "UFNode.h"
+
+using namespace std;
 
 #ifndef __UNIONFIND__
 
@@ -9,8 +12,8 @@ using namespace std;
 class UnionFind {
 
 private:
-	int numVertices; // Node Holder having UFNode
-	UFNode* nodeHolder; // NodeHolder, having UFNode
+	int numVertices; 
+	vector<UFNode> nodeHolder; // NodeHolder, having UFNode
 	int count; // Number of node (Cluster count)
 
 public:

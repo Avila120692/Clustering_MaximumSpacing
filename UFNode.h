@@ -11,7 +11,6 @@ public:
 	int rank;
 	UFNode(int parent, int rank);
 	~UFNode();
-
 };
 
 #endif

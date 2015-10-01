@@ -1,8 +1,4 @@
 /* Node Class implementation */
-
-#include <windows.h>
-#include <GL/gl.h>
-#include "glut.h"
 #include "Node.h"
 
 // Constructor
@@ -34,7 +30,7 @@ void Node::draw(void){
 	// Draw the node
 	glPushMatrix();
 	glTranslatef(x, y, z);
-	glutWireSphere(radius, 8, 8);
+	glutWireSphere(radius, 10, 11);
 	glPopMatrix();
 }
 

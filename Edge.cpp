@@ -1,10 +1,7 @@
 /* Edge class implementation*/
-using namespace std;
-
-#include <windows.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "Edge.h"
+
+using namespace std;
 
 // Constructor
 Edge::Edge(int src, int dest, int weight) {
@@ -20,8 +17,8 @@ void Edge::toString() {
 }
 
 // Compares two edges
-int Edge::compareTo(Edge* another){
-	return (this->weight - another->weight);
+int Edge::compareTo(Edge another){
+	return (this->weight - another.weight);
 }
 
 // Destructor

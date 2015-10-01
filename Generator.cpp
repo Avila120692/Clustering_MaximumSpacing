@@ -1,12 +1,7 @@
 /* Generator Class implementation */
-using namespace std;
-
-#include <windows.h>
-#include <GL/gl.h>
-#include "glut.h"
-#include <time.h>
 #include "Generator.h"
-#include "Node.h"
+
+using namespace std;
 
 const GLfloat node_radius = 0.1;
 const GLfloat node_surface = 0.8;
@@ -41,6 +36,28 @@ void Generator::generateNodes(int n){
 		// Draw node
 		node.draw();
 	}	
+}
+
+
+vector<Edge> Generator::generateEdges(int numEdges){
+
+	vector<Edge> edgeList;
+	
+	edgeList.insert(edgeList.begin(), Edge(1, 2, 4));
+	edgeList.insert(edgeList.end(), Edge(2, 3, 8));
+	edgeList.insert(edgeList.end(), Edge(3, 4, 7));
+	edgeList.insert(edgeList.end(), Edge(4, 5, 9));
+	edgeList.insert(edgeList.end(), Edge(5, 6, 10));
+	edgeList.insert(edgeList.end(), Edge(6, 3, 4));
+	edgeList.insert(edgeList.end(), Edge(6, 7, 2));
+	edgeList.insert(edgeList.end(), Edge(7, 8, 1));
+	edgeList.insert(edgeList.end(), Edge(8, 1, 8));
+	edgeList.insert(edgeList.end(), Edge(8, 2, 11));
+	edgeList.insert(edgeList.end(), Edge(8, 0, 7));
+	edgeList.insert(edgeList.end(), Edge(0, 3, 2));
+	edgeList.insert(edgeList.end(), Edge(0, 7, 6));
+
+	return edgeList;
 }
 
 // Destructor

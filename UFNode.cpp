@@ -1,7 +1,7 @@
 /*UFNode class implementation*/
-using namespace std;
-
 #include "UFNode.h"
+
+using namespace std;
 
 UFNode::UFNode(int parent, int rank){
 
