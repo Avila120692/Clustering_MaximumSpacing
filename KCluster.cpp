@@ -4,8 +4,11 @@
 using namespace std;
 
 // Constructor 
-KCluster::KCluster(int numVertices, int numEdges) {
+KCluster::KCluster(int n) {}
 
+// Set properties fot the graph (numVertices, numEdges)
+void KCluster::setProperties(int numVertices, int numEdges{	
+	
 	this->mNumVertices = numVertices;
 	this->mNumEdges = numEdges;
 }
@@ -17,6 +20,11 @@ int KCluster::getMaxSpacing(int clusterCount) {
 	sort(mEdgeList.begin(), mEdgeList.end(), [](const Edge lhs, const Edge& rhs) {
 		return lhs.weight < rhs.weight;
 	});
+
+	printf("Sorted edges"); /*
+	for (int i = 0; i < mEdgeList.size(); i++)
+		printf("\nEdge [%i] : src[%i] - dest[%i] | weight[%i]", i, mEdgeList.at(i).src, mEdgeList.at(i).dest, mEdgeList.at(i).weight); */
+	
 
 	// The data structure for the UNION and FIND operations
 	UnionFind uf(mNumVertices);
@@ -62,26 +70,16 @@ void KCluster::printEdges() {
 }
 
 // Clustering execution {graph, edges, clusters}
-void KCluster::execute(){
+void KCluster::executeClustering(int k){
 	
-	// Create generator
-	Generator random_generator(1);
-
-	// Add edges to the graph
-	addEdges(random_generator.generateEdges(13));
-
-	// Define number of clusters
-	int k = 4;
-	
-	// Execute clustering algorithm
+	// Call the main method for calculating the k clusters
 	maxClusterDistance = getMaxSpacing(k);
-	
+
 	// Print result : maximum spacing
 	if (maxClusterDistance != -1)
 		printf("\n\nMaximum Cluster Spacing for %i clusters is %i", k, maxClusterDistance);
 	else
 		printf("\nSomething went wrong");
-	
 }
 
 // Destructor

@@ -1,7 +1,7 @@
 /* Generator Class definition*/
 #include <time.h>
 #include <vector>
-#include "Node.h"
+#include "Vertex.h"
 #include "Edge.h"
 
 using namespace std;

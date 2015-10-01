@@ -3,11 +3,11 @@
 #include <GL/gl.h>
 #include "glut.h"
 
-#ifndef __NODE__
+#ifndef __VERTEX__
 
-#define __NODE__
+#define __VERTEX__
 
-class Node {
+class Vertex{
 
 public:
 	GLfloat x;
@@ -16,9 +16,9 @@ public:
 	GLfloat radius;
 	GLfloat demi_radius;
 	GLfloat surface;
-	GLfloat color_surface [3];
-	Node(GLfloat radius, GLfloat surface);
-	~Node();
+	GLfloat color_surface[3];
+	Vertex(GLfloat radius, GLfloat surface);
+	~Vertex();
 	void setPosition(GLfloat x, GLfloat y, GLfloat z);
 	void setColor(GLfloat R, GLfloat G, GLfloat B);
 	void draw(void);

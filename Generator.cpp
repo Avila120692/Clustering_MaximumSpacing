@@ -3,8 +3,8 @@
 
 using namespace std;
 
-const GLfloat node_radius = 0.1;
-const GLfloat node_surface = 0.8;
+const GLfloat vertex_radius = 0.1;
+const GLfloat vertex_surface = 0.8;
 
 // Constructor
 Generator::Generator(int random_factor){
@@ -16,7 +16,7 @@ void Generator::generateNodes(int n){
 	GLfloat random_x = 0.0;
 	GLfloat random_y = 0.0;
 	GLfloat random_z = 0.0;
-	Node node(node_radius, node_surface);
+	Vertex vertex(vertex_radius, vertex_surface);
 
 	// Initialize random seed
 	srand(time(NULL));
@@ -28,13 +28,13 @@ void Generator::generateNodes(int n){
 		random_z = (GLfloat)(rand() % 250 + 1) / 100;
 		
 		// Set position for the node Point(x,y,z) is center of node body
-		node.setPosition(random_x, random_y, random_z);
+		vertex.setPosition(random_x, random_y, random_z);
 
 		// Set color for node surface
-		node.setColor(5.0, 5.0, 0.0);
+		vertex.setColor(5.0, 5.0, 0.0);
 
 		// Draw node
-		node.draw();
+		vertex.draw();
 	}	
 }
 

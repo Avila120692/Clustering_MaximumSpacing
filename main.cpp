@@ -4,68 +4,61 @@
 #include <GL/gl.h>
 #include "glut.h"
 //#include "glui.h"
-#include <vector>
-#include <algorithm>
+
+#include "Helper.h"
 #include "Generator.h"
-#include "Edge.h"
 #include "KCluster.h"
 
 using namespace std;
 
+// Instantiate Helper object (graphic enviroment utility)
+static Helper helper(1);
+
+// Instantiate generator
+static Generator random_generator(1);
+
+// Declare graph properties (numVertices, numEdges, numClusters[k])
+int numVertices, numEdges, k;
+
+// Instantiate the Graph
+KCluster graph(1);
+
 void init(void){
+
+	// Initialize graph properties
+	numVertices = 9;
+	numEdges = 13;
+	k = 4;
+
+	// Instantiate the graph
+	graph.setProperties(numVertices, numEdges);
+
+	// Add edges to the graph
+	graph.addEdges(random_generator.generateEdges(numEdges));
+	random_generator.generateNodes(20); // INTEGRATE THESE BOTH
+ 
 	// Set clear (background) color
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 }
 
-// Draw an axis with a cone at the end : From CG using OpenGL - Hill and Kelley
-void drawAxis(double length) {
-	glPushMatrix();
 
-	// Draw line
-	glBegin(GL_LINES);
-	glVertex3d(0.0, 0.0, 0.0);
-	glVertex3d(0.0, 0.0, length);
-	glEnd();
-
-	// Draw cone
-	glTranslated(0.0, 0.0, length - 0.2);
-	glutSolidCone(0.04, 0.2, 12, 9);
-	
-	glPopMatrix();
-}
 
 void display(void){
 	// Clear the buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(255.0, 255.0, 0.0);
 
-	// ----------------------------------------------------
-	// Draw reference frame
-	glLineWidth(1.0);
+	// Draw enviroment (axis, reference frame, background texture, parallax effect)
+	helper.drawGraphicEnviroment();
 
-	// Z axis
-	glColor3f(1.0, 0.0, 0.0);
-	drawAxis(3.0);
+	// Draw graph (all edges)
+	graph.draw();
 
-	// X axis
-	glColor3f(0.0, 1.0, 0.0);
-	glPushMatrix();
-	glRotated(90.0, 0.0, 1.0, 0.0);
-	drawAxis(3.0);
-	glPopMatrix();
+	// Execute clustering algorithm
+	graph.executeClustering(k);
 
-	// Y axis
-	glColor3f(0.0, 0.0, 1.0);
-	glPushMatrix();
-	glRotated(-90.0, 1.0, 0.0, 0.0);
-	drawAxis(2.5);
-	glPopMatrix();
-	// -----------------------------------------------------
-
-	// Generate nodes
-	//random_generator.generateNodes(20);
-
-	// -----------------------------------------------------
+	// Draw representation of clusters (k-1 edges)
+	//graph.drawClusters(); <- PERHAPS IT WONT BE HERE
 
 	// Force execution of GL commands in finite time
 	glFlush();
@@ -104,7 +97,6 @@ void mouse(int btn, int state, int x, int y) {
 
 int main(int argc, char** argv){
 
-	/*
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(1340, 680);
@@ -119,13 +111,7 @@ int main(int argc, char** argv){
 
 	init();
 	glutMainLoop();
-	*/
 
-	// Clustering algorithm
-	KCluster graph(9, 13); // Define graph properties (numVertices, numEdges)
-	graph.execute();
-
-	cout << "\n\n";
 	system("pause");
 	return 0;
 }

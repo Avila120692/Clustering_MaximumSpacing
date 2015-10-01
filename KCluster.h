@@ -20,12 +20,15 @@ private:
 
 public:
 	int maxClusterDistance; // for K cluster
-	KCluster(int numVertices, int numEdges);
+	KCluster(int n);
 	~KCluster();
+	void setProperties(int numVertices, int numEdges);
 	int getMaxSpacing(int clusterCount);
 	void addEdges(vector<Edge> e_collection);
 	void printEdges();
-	void execute();
+	void executeClustering(int k);
+	void draw();
+	void drawClusters();
 };
 
 

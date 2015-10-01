@@ -30,9 +30,6 @@
     <ClInclude Include="UFNode.h">
       <Filter>Source Files\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Source Files\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="UnionFind.h">
       <Filter>Source Files\Interfaces</Filter>
     </ClInclude>
@@ -40,6 +37,12 @@
       <Filter>Source Files\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="Generator.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
       <Filter>Source Files\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,13 +59,16 @@
     <ClCompile Include="KCluster.cpp">
       <Filter>Source Files\Implementations</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>Source Files\Implementations</Filter>
-    </ClCompile>
     <ClCompile Include="UFNode.cpp">
       <Filter>Source Files\Implementations</Filter>
     </ClCompile>
     <ClCompile Include="UnionFind.cpp">
+      <Filter>Source Files\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Source Files\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper.cpp">
       <Filter>Source Files\Implementations</Filter>
     </ClCompile>
   </ItemGroup>

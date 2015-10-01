@@ -55,7 +55,7 @@ bool UnionFind::isConnected(int v1, int v2){
 
 // Prints the clusters here
 void UnionFind::printCluster(){
-	printf("%s \n", "Print clusters:");
+	printf("\n\nPrint clusters:");
 
 	for (int i = 0; i < nodeHolder.size(); i++)
 		printf("\nnodeHolder[%i] : parent[%i]", i, nodeHolder.at(i).parent);
