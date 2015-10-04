@@ -52,7 +52,7 @@ void display(void){
 	helper.drawGraphicEnviroment();
 
 	// Draw original graph (all edges)
-	graph.drawGraph();
+	graph.draw(); // <--- IMPLEMENT THIS CORRECTLY
 
 	// Execute clustering algorithm
 	graph.executeClustering(k);

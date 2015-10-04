@@ -55,6 +55,7 @@ int Graph::getMaxSpacing(int clusterCount) {
 	return -1;
 }
 
+// Once the random collection of edges is generated, add them to the graph
 void Graph::addEdges(vector<Edge> e_collection){
 
 	// Fill mEdgeList with random collection of edges in Generator.cpp	
@@ -63,6 +64,7 @@ void Graph::addEdges(vector<Edge> e_collection){
 
 }
 
+// Verify the edges in console
 void Graph::printEdges() {
 
 	for (int i = 0; i < mEdgeList.size(); i++)
@@ -82,7 +84,14 @@ void Graph::executeClustering(int k){
 		printf("\nSomething went wrong");
 }
 
-void Graph::drawGraph(){
+// Draw the original graph (all edges) in 3D
+void Graph::draw(){ // <---------------------------------------------------------- HERE HERE HERE
+
+	// You have a vector of edges, do what you need to do in order to call
+
+	// new vertex(x, y, z)...  vertex.draw()  SPHERE
+
+	// new edge( src, dest, weight)... edge.draw()   LINE
 
 }
 

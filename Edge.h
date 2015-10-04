@@ -1,5 +1,8 @@
 /* Edge class definition*/
+#include <windows.h>
 #include <iostream>
+#include <GL/gl.h>
+#include "glut.h"
 
 using namespace std;
 
@@ -17,6 +20,7 @@ public:
 	~Edge();
 	void toString(); // check method
 	int compareTo(Edge another);
+	void draw();
 };
 
 #endif

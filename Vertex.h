@@ -21,7 +21,7 @@ public:
 	~Vertex();
 	void setPosition(GLfloat x, GLfloat y, GLfloat z);
 	void setColor(GLfloat R, GLfloat G, GLfloat B);
-	void draw(GLfloat x, GLfloat y, GLfloat z);
+	void draw(void);
 	void drawBody(void);
 };
 

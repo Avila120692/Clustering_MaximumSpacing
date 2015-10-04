@@ -25,11 +25,7 @@ void Vertex::setColor(GLfloat R, GLfloat G, GLfloat B){
 }
 
 // Draw the node with a predefined body (Wire sphere)
-void Vertex::draw(GLfloat x, GLfloat y, GLfloat z){
-
-	this->x = 0.0;
-	this->y = 0.0;
-	this->z = 0.0;
+void Vertex::draw(void){
 
 	// Color for node
 	glColor3f(color_surface[0], color_surface[1], color_surface[2]);

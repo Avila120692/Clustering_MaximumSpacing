@@ -27,7 +27,7 @@ public:
 	void addEdges(vector<Edge> e_collection);
 	void printEdges();
 	void executeClustering(int k);
-	void drawGraph();
+	void draw();
 	void drawClusters();
 };
 
