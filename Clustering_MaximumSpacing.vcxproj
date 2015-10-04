@@ -67,8 +67,8 @@
   <ItemGroup>
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Generator.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="Helper.h" />
-    <ClInclude Include="KCluster.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="UFNode.h" />
     <ClInclude Include="UnionFind.h" />
@@ -77,8 +77,8 @@
   <ItemGroup>
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Generator.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Helper.cpp" />
-    <ClCompile Include="KCluster.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UFNode.cpp" />
     <ClCompile Include="UnionFind.cpp" />

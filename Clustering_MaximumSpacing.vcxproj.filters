@@ -33,9 +33,6 @@
     <ClInclude Include="UnionFind.h">
       <Filter>Source Files\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="KCluster.h">
-      <Filter>Source Files\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="Generator.h">
       <Filter>Source Files\Interfaces</Filter>
     </ClInclude>
@@ -43,6 +40,9 @@
       <Filter>Source Files\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="Helper.h">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
       <Filter>Source Files\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,9 +56,6 @@
     <ClCompile Include="Generator.cpp">
       <Filter>Source Files\Implementations</Filter>
     </ClCompile>
-    <ClCompile Include="KCluster.cpp">
-      <Filter>Source Files\Implementations</Filter>
-    </ClCompile>
     <ClCompile Include="UFNode.cpp">
       <Filter>Source Files\Implementations</Filter>
     </ClCompile>
@@ -69,6 +66,9 @@
       <Filter>Source Files\Implementations</Filter>
     </ClCompile>
     <ClCompile Include="Helper.cpp">
+      <Filter>Source Files\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
       <Filter>Source Files\Implementations</Filter>
     </ClCompile>
   </ItemGroup>

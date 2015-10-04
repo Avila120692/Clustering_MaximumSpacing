@@ -3,46 +3,18 @@
 
 using namespace std;
 
-const GLfloat vertex_radius = 0.1;
-const GLfloat vertex_surface = 0.8;
-
 // Constructor
 Generator::Generator(int random_factor){
 	this->random_factor = random_factor;
 }
 
-void Generator::generateNodes(int n){
-	// Random variables for nodes position and body messures
-	GLfloat random_x = 0.0;
-	GLfloat random_y = 0.0;
-	GLfloat random_z = 0.0;
-	Vertex vertex(vertex_radius, vertex_surface);
 
-	// Initialize random seed
-	srand(time(NULL));
-
-	for (int i = 1; i <= n; i++) {
-		// Here we would apply a randomness technique
-		random_x = (GLfloat)(rand() % 250 + 1) / 100;
-		random_y = (GLfloat)(rand() % 250 + 1) / 100;
-		random_z = (GLfloat)(rand() % 250 + 1) / 100;
-		
-		// Set position for the node Point(x,y,z) is center of node body
-		vertex.setPosition(random_x, random_y, random_z);
-
-		// Set color for node surface
-		vertex.setColor(5.0, 5.0, 0.0);
-
-		// Draw node
-		vertex.draw();
-	}	
-}
-
-
+// Here we would generate the random edges (src, dest, weight)
 vector<Edge> Generator::generateEdges(int numEdges){
 
 	vector<Edge> edgeList;
 	
+	// For the moment, we dont apply the random generator
 	edgeList.insert(edgeList.begin(), Edge(1, 2, 4));
 	edgeList.insert(edgeList.end(), Edge(2, 3, 8));
 	edgeList.insert(edgeList.end(), Edge(3, 4, 7));
@@ -56,6 +28,19 @@ vector<Edge> Generator::generateEdges(int numEdges){
 	edgeList.insert(edgeList.end(), Edge(8, 0, 7));
 	edgeList.insert(edgeList.end(), Edge(0, 3, 2));
 	edgeList.insert(edgeList.end(), Edge(0, 7, 6));
+
+	return edgeList;
+}
+
+// Generate random edges (src, dest, weight)
+vector<Edge> Generator::generateRandomEdges(int numEdges){
+
+	vector<Edge> edgeList;
+
+	// Here we would apply a randomness technique
+	/*random_x = (GLfloat)(rand() % 250 + 1) / 100;
+	random_y = (GLfloat)(rand() % 250 + 1) / 100;
+	random_z = (GLfloat)(rand() % 250 + 1) / 100;*/
 
 	return edgeList;
 }

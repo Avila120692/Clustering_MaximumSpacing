@@ -1,10 +1,12 @@
 /* Node Class implementation */
 #include "Vertex.h"
 
+using namespace std;
+
 // Constructor
 Vertex::Vertex(GLfloat radius, GLfloat surface){
-	this->radius = radius;
-	this->surface = surface;
+	this->radius = radius; // 0.1
+	this->surface = surface; // 0.8
 	demi_radius = radius - 0.4;
 }
 
@@ -23,14 +25,19 @@ void Vertex::setColor(GLfloat R, GLfloat G, GLfloat B){
 }
 
 // Draw the node with a predefined body (Wire sphere)
-void Vertex::draw(void){
+void Vertex::draw(GLfloat x, GLfloat y, GLfloat z){
+
+	this->x = 0.0;
+	this->y = 0.0;
+	this->z = 0.0;
+
 	// Color for node
 	glColor3f(color_surface[0], color_surface[1], color_surface[2]);
 
 	// Draw the node
 	glPushMatrix();
-	glTranslatef(x, y, z);
-	glutWireSphere(radius, 10, 11);
+		glTranslatef(x, y, z);
+		glutSolidSphere(radius, 10, 11);
 	glPopMatrix();
 }
 

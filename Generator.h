@@ -18,6 +18,7 @@ public:
 	~Generator();
 	void generateNodes(int n);
 	vector<Edge> generateEdges(int numEdges);
+	vector<Edge> generateRandomEdges(int numEdges);
 };
 
 #endif

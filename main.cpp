@@ -7,7 +7,7 @@
 
 #include "Helper.h"
 #include "Generator.h"
-#include "KCluster.h"
+#include "Graph.h"
 
 using namespace std;
 
@@ -21,7 +21,7 @@ static Generator random_generator(1);
 int numVertices, numEdges, k;
 
 // Instantiate the Graph
-KCluster graph(1);
+Graph graph(1);
 
 void init(void){
 
@@ -35,7 +35,7 @@ void init(void){
 
 	// Add edges to the graph
 	graph.addEdges(random_generator.generateEdges(numEdges));
-	random_generator.generateNodes(20); // INTEGRATE THESE BOTH
+
  
 	// Set clear (background) color
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -52,7 +52,7 @@ void display(void){
 	helper.drawGraphicEnviroment();
 
 	// Draw original graph (all edges)
-	graph.draw();
+	graph.drawGraph();
 
 	// Execute clustering algorithm
 	graph.executeClustering(k);
