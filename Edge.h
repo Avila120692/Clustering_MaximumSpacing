@@ -1,8 +1,10 @@
 /* Edge class definition*/
 #include <windows.h>
 #include <iostream>
+#include <vector>
 #include <GL/gl.h>
 #include "glut.h"
+#include "Vertex.h"
 
 using namespace std;
 
@@ -13,14 +15,14 @@ using namespace std;
 class Edge {
 
 public:
-	int src;
-	int dest;
-	int weight;
-	Edge(int src, int dest, int weight);
+	GLint src;
+	GLint dest;
+	GLfloat weight;
+	Edge(GLint src, GLint dest, GLfloat weight);
 	~Edge();
 	void toString(); // check method
 	int compareTo(Edge another);
-	void draw();
+	void draw(vector<Vertex> vertices);
 };
 
 #endif

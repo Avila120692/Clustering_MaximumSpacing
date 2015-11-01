@@ -14,15 +14,12 @@ public:
 	GLfloat y;
 	GLfloat z;
 	GLfloat radius;
-	GLfloat surface;
-	GLfloat demi_radius;
 	GLfloat color_surface[3];
-	Vertex(GLfloat radius, GLfloat surface);
+	Vertex(GLfloat x, GLfloat y, GLfloat z);
 	~Vertex();
 	void setPosition(GLfloat x, GLfloat y, GLfloat z);
 	void setColor(GLfloat R, GLfloat G, GLfloat B);
 	void draw(void);
-	void drawBody(void);
 };
 
 #endif

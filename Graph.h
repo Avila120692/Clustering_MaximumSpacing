@@ -14,8 +14,8 @@ using namespace std;
 class Graph {
 
 private:
-	int mNumVertices;   // Number of vertices in the graph
-	int mNumEdges;  // Number of edges in the graph
+	int numVertices;   // Number of vertices in the graph
+	int numEdges;  // Number of edges in the graph
 	vector<Edge> mEdgeList; // Collection of edges representing the Graph
 
 public:
@@ -27,7 +27,8 @@ public:
 	void addEdges(vector<Edge> e_collection);
 	void printEdges();
 	void executeClustering(int k);
-	void draw();
+	void drawVertices(vector<Vertex> vertices);
+	void drawEdges(vector<Vertex> vertices, vector<Edge> edges);
 	void drawClusters();
 };
 

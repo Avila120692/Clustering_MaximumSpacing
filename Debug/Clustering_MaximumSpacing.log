@@ -1,10 +1,25 @@
-﻿Build started 10/4/2015 12:30:58 AM.
+﻿Build started 11/1/2015 1:02:28 AM.
      1>Project "C:\Users\Adrian Avila\documents\visual studio 2013\Projects\Clustering_MaximumSpacing\Clustering_MaximumSpacing\Clustering_MaximumSpacing.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Edge.cpp Generator.cpp Graph.cpp UFNode.cpp UnionFind.cpp main.cpp
          main.cpp
+     1>c:\users\adrian avila\documents\visual studio 2013\projects\clustering_maximumspacing\clustering_maximumspacing\glui.h(30): warning C4005: '_CRT_SECURE_NO_WARNINGS' : macro redefinition
+                 command-line arguments :  see previous definition of '_CRT_SECURE_NO_WARNINGS'
+         Graph.cpp
+     1>c:\users\adrian avila\documents\visual studio 2013\projects\clustering_maximumspacing\clustering_maximumspacing\graph.cpp(62): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\adrian avila\documents\visual studio 2013\projects\clustering_maximumspacing\clustering_maximumspacing\graph.cpp(70): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\adrian avila\documents\visual studio 2013\projects\clustering_maximumspacing\clustering_maximumspacing\graph.cpp(91): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\adrian avila\documents\visual studio 2013\projects\clustering_maximumspacing\clustering_maximumspacing\graph.cpp(99): warning C4018: '<' : signed/unsigned mismatch
+         Edge.cpp
+         Generating Code...
+         Compiling...
+         Generator.cpp
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         UnionFind.cpp
+         UFNode.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Adrian Avila\documents\visual studio 2013\Projects\Clustering_MaximumSpacing\Debug\Clustering_MaximumSpacing.exe" /INCREMENTAL /NOLOGO opengl32.lib glut32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Adrian Avila\documents\visual studio 2013\Projects\Clustering_MaximumSpacing\Debug\Clustering_MaximumSpacing.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Adrian Avila\documents\visual studio 2013\Projects\Clustering_MaximumSpacing\Debug\Clustering_MaximumSpacing.lib" /MACHINE:X86 Debug\Clustering_MaximumSpacing.res
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Adrian Avila\documents\visual studio 2013\Projects\Clustering_MaximumSpacing\Debug\Clustering_MaximumSpacing.exe" /INCREMENTAL /NOLOGO opengl32.lib glui32.lib glut32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:LIBCD.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Adrian Avila\documents\visual studio 2013\Projects\Clustering_MaximumSpacing\Debug\Clustering_MaximumSpacing.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Adrian Avila\documents\visual studio 2013\Projects\Clustering_MaximumSpacing\Debug\Clustering_MaximumSpacing.lib" /MACHINE:X86 Debug\Clustering_MaximumSpacing.res
          Debug\Edge.obj
          Debug\Generator.obj
          Debug\Graph.obj
@@ -18,4 +33,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.88
+Time Elapsed 00:00:03.66

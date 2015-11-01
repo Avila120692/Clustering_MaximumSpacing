@@ -4,10 +4,14 @@
 using namespace std;
 
 // Constructor
-Vertex::Vertex(GLfloat radius, GLfloat surface){
-	this->radius = radius; // 0.1
-	this->surface = surface; // 0.8
-	demi_radius = radius - 0.4;
+Vertex::Vertex(GLfloat x, GLfloat y, GLfloat z){
+	this->radius = 0.1;
+	this->x = x;
+	this->y = y;
+	this->z = z;
+	this->color_surface[0] = 0.05;
+	this->color_surface[1] = 0.46;
+	this->color_surface[2] = 0.37;
 }
 
 // Sets parameters for 3D position
@@ -37,35 +41,6 @@ void Vertex::draw(void){
 	glPopMatrix();
 }
 
-// Draw the node with a constructed body
-void Vertex::drawBody(void){
-	// Color for polygons forming the node
-	glColor3f(color_surface[0], color_surface[1], color_surface[2]);
-
-	// Draw the polygon(s)
-	glBegin(GL_POLYGON);
-	// Face # 1
-	glVertex3f((x), (y), (z + radius)); // Face middle point
-	glVertex3f((x - surface / 2), (y - surface / 2), (z + demi_radius));
-	glVertex3f((x + surface / 2), (y - surface / 2), (z + demi_radius));
-	glVertex3f((x + surface / 2), (y + surface / 2), (z + demi_radius));
-	glVertex3f((x - surface / 2), (y + surface / 2), (z + demi_radius));
-	glVertex3f((x - surface / 2), (y - surface / 2), (z + demi_radius));
-
-	// Face # 2
-	glVertex3f((x - surface / 2), (y - surface / 2), (z + demi_radius));
-	glVertex3f((x - demi_radius), (y - surface / 2), (z - surface / 2));
-	glVertex3f((x - demi_radius), (y + surface / 2), (z - surface / 2));
-	glVertex3f((x - radius), (y), (z)); // Face middle point
-	glVertex3f((x - demi_radius), (y + surface / 2), (z + surface / 2));
-	glVertex3f((x - demi_radius), (y + surface / 2), (z - surface / 2));
-
-
-	//Face # 3
-	glVertex3f((x - surface / 2), (y + surface / 2), (z - demi_radius));
-	glVertex3f((x - surface / 2), (y + surface / 2), (z - demi_radius));
-	glEnd();
-}
 
 // Destructor
 Vertex::~Vertex(){}

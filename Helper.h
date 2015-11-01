@@ -13,9 +13,10 @@ using namespace std;
 class Helper {
 
 public:
-	Helper(int n);
+	Helper();
 	~Helper();
 	void drawAxis(double length);
+	void drawPlanes();
 	void drawGraphicEnviroment();
 };
 

@@ -4,7 +4,7 @@
 using namespace std;
 
 // Constructor
-Edge::Edge(int src, int dest, int weight) {
+Edge::Edge(GLint src, GLint dest, GLfloat weight) {
 
 	this->src = src;
 	this->dest = dest;
@@ -21,22 +21,20 @@ int Edge::compareTo(Edge another){
 	return (this->weight - another.weight);
 }
 
-void Edge::draw(){
+void Edge::draw(vector<Vertex> vertices){
 
-	// Draw reference frame
+	Vertex v1 = vertices.at(src-1);
+	Vertex v2 = vertices.at(dest-1);
+
+	// Line width
 	glLineWidth(0.8);
 	
 	// Draw line
+	glColor3f(0.0, 0.0, 0.0);
 	glBegin(GL_LINES);
-		glVertex3d(src, 0.0, 0.0);
-		glVertex3d(dest, 0.0, 0.0);
+		glVertex3d(v1.x, v1.y, v1.z);
+		glVertex3d(v2.x, v2.y, v2.z);
 	glEnd();
-
-	glPushMatrix();
-		// Draw cone
-		glTranslated(0.0, 0.0, weight - 0.2);
-		glutSolidCone(0.04, 0.2, 12, 9);
-	glPopMatrix();
 }
 
 // Destructor
