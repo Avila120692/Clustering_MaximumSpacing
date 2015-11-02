@@ -2,7 +2,6 @@
 #include <vector>
 #include <algorithm>
 #include "Edge.h"
-#include "Generator.h"
 #include "UnionFind.h"
 
 using namespace std;
@@ -14,21 +13,20 @@ using namespace std;
 class Graph {
 
 private:
-	int numVertices;   // Number of vertices in the graph
-	int numEdges;  // Number of edges in the graph
-	vector<Edge> mEdgeList; // Collection of edges representing the Graph
+	vector<Vertex> vertices;
+	vector<Edge> edges;
+	vector<int> clusters;
 
 public:
-	int maxClusterDistance; // for K cluster
-	Graph(int n);
+	float maxClusterDistance; 
+	Graph(vector<Vertex> vertices, vector<Edge> edges);
 	~Graph();
-	void setProperties(int numVertices, int numEdges);
-	int getMaxSpacing(int clusterCount);
-	void addEdges(vector<Edge> e_collection);
-	void printEdges();
-	void executeClustering(int k);
-	void drawVertices(vector<Vertex> vertices);
-	void drawEdges(vector<Vertex> vertices, vector<Edge> edges);
+	
+	void printData();
+	float getMaxSpacing(int clusterCount);
+	vector<int> executeClustering(int k);
+	void drawVertices(float dist_color);
+	void drawEdges();
 	void drawClusters();
 };
 

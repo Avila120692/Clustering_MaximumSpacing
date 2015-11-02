@@ -1,6 +1,6 @@
 /* UnionFind class definition*/
+#include <iostream>
 #include <vector>
-#include <map>
 #include "UFNode.h"
 
 using namespace std;
@@ -23,7 +23,7 @@ public:
 	void Union(int v1, int v2);
 	int getCount();
 	bool isConnected(int v1, int v2);
-	void printCluster();
+	vector<int> getClusters();
 };
 
 #endif

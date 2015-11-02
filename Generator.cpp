@@ -7,19 +7,19 @@ using namespace std;
 Generator::Generator(){}
 
 // (LCG) : Linear Congruential Generator
-GLint Generator::lcg(GLint m, GLint a, GLint c, GLint x0){
+int Generator::lcg(int m, int a, int c, int x0){
 
 	return - 1.0;
 }
 
 // (MCG) : Multiplicative Congruential Generator
-GLint Generator::mcg(GLint m, GLint a, GLint x0){
+GLint Generator::mcg(int m, int a, int x0){
 
 	return -1.0;
 }
 
 // Generate random position -> Must return float value in the range [1, 12]
-GLint Generator::randomPosition_X(GLboolean mult_generator){
+int Generator::randomPosition_X(bool mult_generator){
 	// Initialize random seed
 	srand(time(NULL));
 	GLint x0, posX;
@@ -33,10 +33,10 @@ GLint Generator::randomPosition_X(GLboolean mult_generator){
 }
 
 // Generate random position -> Must return float value in the range [1, 4]
-GLint Generator::randomPosition_Y(GLboolean mult_generator){
+int Generator::randomPosition_Y(bool mult_generator){
 	// Initialize random seed
 	srand(time(NULL)*10);
-	GLint x0, posY;
+	int x0, posY;
 	x0 = rand() % 4 + 1;
 	
 	// posy = mult_generator ? mcg( m, a, c, x0) : lcg( m, a, x0);
@@ -47,10 +47,10 @@ GLint Generator::randomPosition_Y(GLboolean mult_generator){
 }
 
 // Generate random position -> Must return float values in the range [1, 12]
-GLint Generator::randomPosition_Z(GLboolean mult_generator){
+int Generator::randomPosition_Z(bool mult_generator){
 	// Initialize random seed
 	srand(time(NULL) * 100);
-	GLint x0, posZ;
+	int x0, posZ;
 	x0 = rand() % 6 + 1;
 
 	// posz = mult_generator ? mcg( m, a, c, x0) : lcg( m, a, x0);
@@ -61,10 +61,10 @@ GLint Generator::randomPosition_Z(GLboolean mult_generator){
 }
 
 // Generate random edge -> Must return integer value in the range [1, numEdges]
-GLint Generator::randomEdge(GLboolean mult_generator, GLint numEdges){
+int Generator::randomEdge(bool mult_generator, int numEdges){
 	// Initialize random seed
 	srand(time(NULL) * 100);
-	GLint x0, edge_key;
+	int x0, edge_key;
 	x0 = rand() % numEdges + 1;
 
 	// edge_key = mult_generator ? mcg( m, a, c, x0) : lcg( m, a, x0);
@@ -75,7 +75,7 @@ GLint Generator::randomEdge(GLboolean mult_generator, GLint numEdges){
 }
 
 // Generate the random vertices (x, y, z)
-vector<Vertex> Generator::generateVertices(GLint numVertices, GLboolean mult){
+vector<Vertex> Generator::generateVertices(int numVertices, bool mult){
 
 	vector<Vertex> vertexList;
 	
@@ -96,14 +96,16 @@ vector<Vertex> Generator::generateVertices(GLint numVertices, GLboolean mult){
 }
 
 // Generate the random edges (src, dest, weight)
-vector<Edge> Generator::generateEdges(GLint numEdges, vector<Vertex> vertices, GLboolean mult){
+vector<Edge> Generator::generateEdges(vector<Vertex> vertices, int numEdges, bool mult){
 
-	vector<Edge> edgeList;
+	vector<Edge> edges;
 	
 	// Edges collection is BASE 1 !!!! <--- VERIFY THIS IN ALGORITHM
 	// Temporal edges [testing purposses]
-	edgeList.insert(edgeList.end(), Edge(1, 3, distance(vertices.at(1-1), vertices.at(3-1))));
-	edgeList.insert(edgeList.end(), Edge(2, 4, distance(vertices.at(2-1), vertices.at(4-1))));
+	edges.insert(edges.end(), Edge(0, 1, distance(vertices.at(0), vertices.at(1))));
+	edges.insert(edges.end(), Edge(1, 2, distance(vertices.at(1), vertices.at(2))));
+	edges.insert(edges.end(), Edge(2, 3, distance(vertices.at(2), vertices.at(3))));
+	edges.insert(edges.end(), Edge(3, 4, distance(vertices.at(3), vertices.at(4))));
 
 	/* Others edges
 	//for (int i = 0; i < numEdges; i++){
@@ -117,12 +119,11 @@ vector<Edge> Generator::generateEdges(GLint numEdges, vector<Vertex> vertices, G
 	}
 	*/
 
-	return edgeList;
+	return edges;
 }
 
 // Calculate the 'distance' function among the objects
-GLfloat Generator::distance(Vertex v1, Vertex v2){
-
+float Generator::distance(Vertex v1, Vertex v2){
 	// Calculate the euclidian distance between vertices
 	return sqrt(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2) + pow(v2.z - v1.z, 2));
 }

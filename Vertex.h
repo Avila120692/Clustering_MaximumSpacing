@@ -1,7 +1,6 @@
 /* Node Class definition*/
-#include <windows.h>
-#include <GL/gl.h>
-#include "glut.h"
+#include <iostream>
+#include "glui.h"
 
 #ifndef __VERTEX__
 
@@ -15,11 +14,12 @@ public:
 	GLfloat z;
 	GLfloat radius;
 	GLfloat color_surface[3];
-	Vertex(GLfloat x, GLfloat y, GLfloat z);
+	Vertex(float x, float y, float z);
 	~Vertex();
-	void setPosition(GLfloat x, GLfloat y, GLfloat z);
-	void setColor(GLfloat R, GLfloat G, GLfloat B);
-	void draw(void);
+
+	void setPosition(float x, float y, float z);
+	void setColor(float R, float G, float B);
+	void draw(float dist_color);
 };
 
 #endif

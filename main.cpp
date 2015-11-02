@@ -34,16 +34,18 @@ GLfloat camAngle_inc_Y = 0.0;
 Helper* helper = new Helper();
 
 // Instantiate generator
-GLboolean mult_generator;
+GLboolean mult_generator = false;
 Generator* generator = new Generator();
 
 // Declare graph properties (numVertices, numEdges, numClusters[k])
 int numVertices, numEdges, k;
+Graph* graph;
 vector<Vertex> vertices;
 vector<Edge> edges;
+vector<int> clusters;
 
-// Instantiate the Graph
-Graph graph(1);
+// Color
+GLfloat dist_color = 1.0;
 
 void init(void){
 	// Define default material properties
@@ -78,20 +80,18 @@ void init(void){
 
 	/********************* GRAPH *************************************************************/
 	// Initialize graph properties
-	numVertices = 5; // Valid range : [2, 50]
-	numEdges = 2; // Valid range : [1, 49]
-	k = 2; // Valid range : [1, 10]
+	numVertices = 0; // Valid range : [2, 50]
+	numEdges = 0; // Valid range : [1, 49]
+	k = 3; // Valid range : [1, 10]
 	mult_generator = false;
 
 	// Vertices and edges collections
 	vertices = generator->generateVertices(numVertices, mult_generator);
-	edges = generator->generateEdges(numEdges, vertices, numEdges);
+	edges = generator->generateEdges(vertices, numEdges, mult_generator);
 
-	// Instantiate the graph
-	graph.setProperties(numVertices, numEdges);
-
-	// Add edges to the graph
-	graph.addEdges(edges);
+	// Instantiate the graph with vertices and edges
+	graph = new Graph(vertices, edges);
+	graph->printData();
 
 	// Set clear (background) color
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -109,22 +109,17 @@ void display(void){
 	glLoadIdentity();
 	
 	// Set the camera's lookAt vector
-	gluLookAt(camPosition_X, camPosition_Y, camPosition_Z, (camPosition_X + camTarget_X), (camPosition_Y + camTarget_Y), (camPosition_Z+camTarget_Z), 0.0, 1.0, 0.0);
+	gluLookAt(camPosition_X, camPosition_Y, camPosition_Z, (camPosition_X+camTarget_X), (camPosition_Y + camTarget_Y), (camPosition_Z+camTarget_Z), 0.0, 1.0, 0.0);
 
 	/********************************** ENVIROMENT ******************************************/
 	// Draw enviroment (axis, reference frame, background texture, parallax effect)
 	helper->drawGraphicEnviroment();
 
 	/********************************** GRAPH *******************************************/
-	// Draw original graph (all edges)
-	graph.drawVertices(vertices);
-	graph.drawEdges(vertices, edges);
-	
-	// Execute clustering algorithm
-	//graph.executeClustering(k);
+	// Draw graph
+	graph->drawVertices(dist_color);
+	graph->drawEdges();
 
-	// Draw representation of clusters (k-1 edges)
-	//graph.drawClusters(); <- PERHAPS IT WONT BE HERE
 	/************************************************************************************/
 
 
@@ -148,6 +143,16 @@ void reshape(int w, int h){
 // We will have some sort of cotnrol with the keyboard
 void keyboard(unsigned char key, int x, int y){
 	switch (key) {
+	case 'r': case 'R' :
+		// Execute clustering algorithm
+		clusters = graph->executeClustering(k);	
+		
+		for (int i = 0; i < vertices.size(); i++){
+			dist_color = (clusters.at(i));
+			cout << "\nVertex[" << i << "] color factor: " << dist_color;
+		}
+
+		break;
 	case 0x1B:case 'q':case 'Q':
 		exit(0);
 		break;

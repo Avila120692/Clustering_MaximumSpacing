@@ -16,15 +16,17 @@ class Generator {
 public:
 	Generator();
 	~Generator();
-	GLint lcg(GLint m, GLint a, GLint c, GLint x0);
-	GLint mcg(GLint m, GLint a, GLint x0);
-	GLint randomPosition_X(GLboolean mult_generator);
-	GLint randomPosition_Y(GLboolean mult_generator);
-	GLint randomPosition_Z(GLboolean mult_generator);
-	GLint randomEdge(GLboolean mult_generator, GLint numEdges);
-	vector<Vertex> generateVertices(GLint numVertices, GLboolean gcm);
-	vector<Edge> generateEdges(GLint numEdges, vector<Vertex> vertices, GLboolean mult_generator);
-	GLfloat distance(Vertex v1, Vertex v2);
+
+	int lcg(int m, int a, int c, int x0);
+	int mcg(int m, int a, int x0);
+	int randomPosition_X(bool mult_generator);
+	int randomPosition_Y(bool mult_generator);
+	int randomPosition_Z(bool mult_generator);
+	int randomEdge(bool mult_generator, int numEdges);
+	
+	vector<Vertex> generateVertices(int numVertices, bool gcm);
+	vector<Edge> generateEdges(vector<Vertex> vertices, int numEdges, bool gcm);
+	float distance(Vertex v1, Vertex v2);
 };
 
 #endif

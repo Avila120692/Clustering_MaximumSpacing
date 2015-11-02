@@ -5,7 +5,6 @@ using namespace std;
 
 // Constructor
 Edge::Edge(GLint src, GLint dest, GLfloat weight) {
-
 	this->src = src;
 	this->dest = dest;
 	this->weight = weight;
@@ -22,12 +21,12 @@ int Edge::compareTo(Edge another){
 }
 
 void Edge::draw(vector<Vertex> vertices){
-
-	Vertex v1 = vertices.at(src-1);
-	Vertex v2 = vertices.at(dest-1);
+	// Extract the vertices associated to the edge
+	Vertex v1 = vertices.at(src);
+	Vertex v2 = vertices.at(dest);
 
 	// Line width
-	glLineWidth(0.8);
+	glLineWidth(1.2);
 	
 	// Draw line
 	glColor3f(0.0, 0.0, 0.0);

@@ -2,8 +2,6 @@
 #include <windows.h>
 #include <iostream>
 #include <vector>
-#include <GL/gl.h>
-#include "glut.h"
 #include "Vertex.h"
 
 using namespace std;
@@ -15,12 +13,13 @@ using namespace std;
 class Edge {
 
 public:
-	GLint src;
-	GLint dest;
-	GLfloat weight;
+	int src;
+	int dest;
+	float weight;
 	Edge(GLint src, GLint dest, GLfloat weight);
 	~Edge();
-	void toString(); // check method
+
+	void toString();
 	int compareTo(Edge another);
 	void draw(vector<Vertex> vertices);
 };

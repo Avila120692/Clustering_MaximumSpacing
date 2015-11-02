@@ -17,8 +17,9 @@ UnionFind::UnionFind(int size){
 // Finds the parent of a given vertex, using recursion
 int UnionFind::Find(int vertex){
 
-	if (vertex < 0 || vertex >= sizeof(nodeHolder))
+	if (vertex < 0 || vertex >= sizeof(nodeHolder)){
 		nodeHolder.at(vertex).parent = Find(nodeHolder.at(vertex).parent);
+	}
 
 	return nodeHolder.at(vertex).parent;
 }
@@ -49,17 +50,19 @@ int UnionFind::getCount(){
 }
 
 // Receive two vertices from some clusters. Return true if both vertex have same parent
-bool UnionFind::isConnected(int v1, int v2){
+bool UnionFind::isConnected(int v1, int v2){	
+	// Edges-collection has BASE 1 but Vertices-collection has BASE 0
 	return Find(v1) == Find(v2);
 }
 
 // Prints the clusters here
-void UnionFind::printCluster(){
-	printf("\n\nPrint clusters:");
-
+vector<int> UnionFind::getClusters(){
+	vector<int> clusters;
+	
 	for (int i = 0; i < nodeHolder.size(); i++)
-		printf("\nnodeHolder[%i] : parent[%i]", i, nodeHolder.at(i).parent);
-
+		clusters.insert(clusters.end(), nodeHolder.at(i).parent);
+		
+	return clusters;
 }
 
 // Destructor

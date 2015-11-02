@@ -15,6 +15,7 @@ class Helper {
 public:
 	Helper();
 	~Helper();
+
 	void drawAxis(double length);
 	void drawPlanes();
 	void drawGraphicEnviroment();
