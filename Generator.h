@@ -17,6 +17,8 @@ public:
 	Generator();
 	~Generator();
 
+	int att;
+
 	int lcg(int m, int a, int c, int x0);
 	int mcg(int m, int a, int x0);
 	int randomPosition_X(bool mult_generator);

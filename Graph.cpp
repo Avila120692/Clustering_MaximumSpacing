@@ -8,11 +8,12 @@ Graph::Graph(vector<Vertex> vertices, vector<Edge> edges) {
 	// Attribute generated vertices and edges to the graph
 	this->vertices = vertices;
 	this->edges = edges;
+	this->glow = 1.0;
 }
 
 // Print the graph data
 void Graph::printData(){
-	cout << "Graph:";
+	cout << "\nGraph:";
 
 	// Vertices data
 	cout << "\n-------------------- Vertices:";
@@ -45,21 +46,23 @@ float Graph::getMaxSpacing(GLint clusterCount){
 	else {
 		cout << "\n\n------------------- Clustering:";
 		for (int i = 0; i < vertices.size(); i++) {
-			Edge edge = edges.at(i);
-
+				
 			// If parents do not match, consider edge list for MST and , union the two vertex
-			if (!uf.isConnected(edge.src, edge.dest)) {
+			if (!uf.isConnected(edges.at(i).src, edges.at(i).dest)) {
 
 				// If we have finished forming the K clusters
 				if (uf.getCount() == clusterCount) {
 					clusters = uf.getClusters();
 
-					return maxClusterDistance = edge.weight; // Last edge to be added represents the maximum spacing
+					return maxClusterDistance = edges.at(i).weight; // Last edge to be added represents the maximum spacing
 				}
 
-				int v1 = uf.Find(edge.src);  // Parent vertex for source
-				int v2 = uf.Find(edge.dest); // Parent vertex for destinition
+				int v1 = uf.Find(edges.at(i).src);  // Parent vertex for source
+				int v2 = uf.Find(edges.at(i).dest); // Parent vertex for destinition
 				uf.Union(v1, v2);
+
+				// Add the edge to the resultng set of cluster_edges
+				cluster_edges.insert(cluster_edges.end(), edges.at(i));
 			}
 		
 		}
@@ -83,17 +86,25 @@ vector<int> Graph::executeClustering(int k){
 }
 
 // Draw the original graph (ALL vertices) in 3D
-void Graph::drawVertices(float dist_color){
+void Graph::drawVertices(){
 	// Draw each vertex
 	for (int i = 0; i < vertices.size(); i++)
-		vertices.at(i).draw(dist_color);
+		vertices.at(i).draw();
 
 }
 
+// Draw all edges in original graph
 void Graph::drawEdges(){
 	// Draw each edge
 	for (int i = 0; i < edges.size(); i++)
-		edges.at(i).draw(vertices);
+		edges.at(i).draw(vertices, 1.0);
+}
+
+// Draw edges for the clusters
+void Graph::drawClusterEdges(){
+	// Draw each edge (representing just the lines between the connected components)
+	for (int i = 0; i < cluster_edges.size(); i++)
+		cluster_edges.at(i).draw(vertices, 0.0);
 }
 
 // Destructor

@@ -21,7 +21,7 @@ public:
 
 	void toString();
 	int compareTo(Edge another);
-	void draw(vector<Vertex> vertices);
+	void draw(vector<Vertex> vertices, GLfloat mat_env);
 };
 
 #endif

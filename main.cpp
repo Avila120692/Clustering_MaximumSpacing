@@ -17,6 +17,7 @@ GLfloat camPosition_X = 9.0;
 GLfloat camPosition_Y = 2.0;
 GLfloat camPosition_Z = 9.0;
 GLfloat camInc_X = 0.08;
+GLfloat camInc_Y = 0.08;
 GLfloat camInc_Z = 0.1;
 
 // Target point(center) of camera
@@ -24,44 +25,35 @@ GLfloat camTarget_X = 0.0;
 GLfloat camTarget_Y = 0.0;
 GLfloat camTarget_Z = -1.0;
 
-// KEY states. These variables will be zero when no key is being pressed
+// KEY states.
 GLint camOrigin_X = -1;
 GLint camOrigin_Y = -1;
 GLfloat camAngle_inc_X = 0.0;
 GLfloat camAngle_inc_Y = 0.0;
 
-// Instantiate Helper object (graphic enviroment utility)
+// Instantiate Helper
 Helper* helper = new Helper();
 
 // Instantiate generator
-GLboolean mult_generator = false;
+GLboolean mult_generator;
 Generator* generator = new Generator();
 
-// Declare graph properties (numVertices, numEdges, numClusters[k])
+// Declare graph properties 
 int numVertices, numEdges, k;
+boolean show_edges, clustering_executed;
 Graph* graph;
 vector<Vertex> vertices;
 vector<Edge> edges;
 vector<int> clusters;
 
-// Color
-GLfloat dist_color = 1.0;
+// Light, shadows
+GLfloat glow_intensity;
 
 void init(void){
-	// Define default material properties
-	GLfloat mat_specular[] = { 3.0, 3.0, 3.0, 3.0 };
-	GLfloat mat_shininess[] = { 5.0 };
-	GLfloat mat_surface[] = { 0.0, 0.0, 0.0, 0.0 };
-
-	// Set material properties, as defined above
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
-	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_surface);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_surface);
 
 	// Set light properties
-	GLfloat main_light[] = { 0.5, 0.5, 0.5, 1.0 };
-	GLfloat light_position0[] = { 0.0, 4.0, 0.0, 1.0 };
+	GLfloat main_light[] = { 0.7, 0.7, 0.7, 1.0 };
+	GLfloat light_position0[] = { 4.0, 1.0, 10.0, 0.0 };
 
 	// Finish setting up the two lights (position, and component values (specular and diffuse))
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
@@ -72,7 +64,7 @@ void init(void){
 	glShadeModel(GL_SMOOTH);
 
 	// Enable lighting
-	//glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);
 	// Activate (enable) lights
 	glEnable(GL_LIGHT0);
 	// Enable depth testing (for hidden surface removal)
@@ -84,6 +76,8 @@ void init(void){
 	numEdges = 0; // Valid range : [1, 49]
 	k = 3; // Valid range : [1, 10]
 	mult_generator = false;
+	show_edges = false;
+	clustering_executed = false;
 
 	// Vertices and edges collections
 	vertices = generator->generateVertices(numVertices, mult_generator);
@@ -93,8 +87,9 @@ void init(void){
 	graph = new Graph(vertices, edges);
 	graph->printData();
 
-	// Set clear (background) color
-	glClearColor(0.0, 0.0, 0.0, 0.0);
+	// Light, shadows
+	glow_intensity = 1.0;
+
 	/******************************************************************************************/
 }
 
@@ -109,19 +104,26 @@ void display(void){
 	glLoadIdentity();
 	
 	// Set the camera's lookAt vector
-	gluLookAt(camPosition_X, camPosition_Y, camPosition_Z, (camPosition_X+camTarget_X), (camPosition_Y + camTarget_Y), (camPosition_Z+camTarget_Z), 0.0, 1.0, 0.0);
+	gluLookAt(camPosition_X, camPosition_Y, camPosition_Z, (camPosition_X+camTarget_X), (camPosition_Y+camTarget_Y), (camPosition_Z+camTarget_Z), 0.0, 1.0, 0.0);
 
 	/********************************** ENVIROMENT ******************************************/
-	// Draw enviroment (axis, reference frame, background texture, parallax effect)
+	// Draw enviroment (axis, reference frame)
 	helper->drawGraphicEnviroment();
 
 	/********************************** GRAPH *******************************************/
+	if (graph->vertices.at(0).mat_emissive[0] <= 0 )
+		graph->vertices.at(0).mat_emissive[0] += 0.5;
+	else if (graph->vertices.at(0).mat_emissive[0] >= 1.0)
+		graph->vertices.at(0).mat_emissive[0] -= 0.5;
+
 	// Draw graph
-	graph->drawVertices(dist_color);
-	graph->drawEdges();
+	graph->drawVertices();
 
-	/************************************************************************************/
+	if (show_edges)
+		graph->drawEdges();
 
+	if (clustering_executed)
+		graph->drawClusterEdges();
 
 
 	// Swaps the buffers of the current window if double buffered
@@ -143,15 +145,36 @@ void reshape(int w, int h){
 // We will have some sort of cotnrol with the keyboard
 void keyboard(unsigned char key, int x, int y){
 	switch (key) {
+	case 'e': case 'E':
+		// For drawing all the edges again (not just the cluster_edges)
+		show_edges = !show_edges;
+		clustering_executed = !clustering_executed;
+
+		// Return the vertices to its original material color
+		for (int i = 0; i < graph->vertices.size(); i++)
+			graph->vertices.at(i).setMaterial(0.1745, 0.01175, 0.01175);
+
+		break;
 	case 'r': case 'R' :
 		// Execute clustering algorithm
 		clusters = graph->executeClustering(k);	
+		clustering_executed =  !clustering_executed;
 		
-		for (int i = 0; i < vertices.size(); i++){
-			dist_color = (clusters.at(i));
-			cout << "\nVertex[" << i << "] color factor: " << dist_color;
-		}
+		// Modify material for each vertex in function of its resulting cluster's belongness
+		for (int i = 0; i < graph->vertices.size(); i++)
+			graph->vertices.at(i).setMaterial(1.0, clusters.at(i), 0.4);
 
+		break;
+	case 'h': case	'H':
+		graph->vertices.at(0).setPosition(0.0, 0.0, 0.0);
+		break;
+	case 'o' : case 'O':
+		if (camPosition_Y <= 12.0)
+			camPosition_Y += camInc_Y;
+			break;
+	case 'p': case 'P':
+		if (camPosition_Y >= 2.0)
+			camPosition_Y -= camInc_Y;
 		break;
 	case 0x1B:case 'q':case 'Q':
 		exit(0);
@@ -163,31 +186,36 @@ void keyboard(unsigned char key, int x, int y){
 }
 
 
-// Special keys for controlling the camera
+// Special keys for controlling the camera traslations
 void processSpecialKeys(int key, int x, int y) {
-
 	switch (key) {
-		case GLUT_KEY_LEFT:
-			glMatrixMode(GL_PROJECTION);
-			glTranslatef(camInc_X, 0.0, 0.0);
+	case GLUT_KEY_LEFT:
+		if (camPosition_X >= 2.0){
+			camPosition_Z += camInc_Z;
+			camPosition_X -= camInc_X;
+		}
 		break;
-		case GLUT_KEY_RIGHT:
-			glMatrixMode(GL_PROJECTION);
-			glTranslatef(-camInc_X, 0.0, 0.0);
-			break;
-		case GLUT_KEY_UP:
-			glMatrixMode(GL_PROJECTION);
-			glTranslatef(0.0, 0.0, camInc_Z);
-			break;
-		case GLUT_KEY_DOWN:
-			glMatrixMode(GL_PROJECTION);
-			glTranslatef(0.0, 0.0, -camInc_Z);
+	case GLUT_KEY_RIGHT:
+		if (camPosition_Z >= 2.0){
+			camPosition_Z -= camInc_Z;
+			camPosition_X += camInc_X;
+		}
+		break;
+	case GLUT_KEY_UP:
+		if (camPosition_X >= 2.0 && camPosition_Z >= 2){
+			camPosition_X -= camInc_X;
+			camPosition_Z -= camInc_Z;
+		}
+		break;
+	case GLUT_KEY_DOWN:
+		if (camPosition_X <= 16.0 && camPosition_Z <= 16.0){
+			camPosition_X += camInc_X;
+			camPosition_Z += camInc_Z;
+		}
 		break;
 	}
-
 	glutPostRedisplay();
 }
-
 
 void mouse(int btn, int state, int x, int y) {
 
@@ -198,13 +226,12 @@ void mouse(int btn, int state, int x, int y) {
 		if (state == GLUT_UP) {
 			// Horizontal camera rotation
 			camAngle_horizontal += camAngle_inc_X;
-			camOrigin_X = -1;
 
 			// Vertical camera rotation
 			camAngle_vertical += camAngle_inc_Y;
-			camOrigin_Y = -1;
 		}
-		else { // state = GLUT_DOWN
+		else {
+			// if (state = GLUT_DOWN) 
 			camOrigin_X = x;
 			camOrigin_Y = y;
 		}
@@ -212,21 +239,74 @@ void mouse(int btn, int state, int x, int y) {
 }
 
 void mouseMove(int x, int y) {
+	// Update angle increment for both rotations
+	camAngle_inc_X = (x - camOrigin_X) * 0.001; // [Horizontal]
+	camAngle_inc_Y = (y - camOrigin_Y) * 0.001; // [Vertical]
 
-	// This will only be true when the left button is down
-	if (camOrigin_X >= 0) {
+	// Update camera's orientation [Horizontal]
+	camTarget_X = sin(camAngle_horizontal + camAngle_inc_X);
+	camTarget_Z = -cos(camAngle_horizontal + camAngle_inc_X);
 
-		// Update angle increment for both rotations
-		camAngle_inc_X = (x - camOrigin_X) * 0.001; // [Horizontal]
-		camAngle_inc_Y = (y - camOrigin_Y) * 0.001; // [Vertical]
+	// Update camera's orientation [Vertical]
+	camTarget_Y = -sin(camAngle_vertical + camAngle_inc_Y);
+}
 
-		// Update camera's orientation [Horizontal]
-		camTarget_X = -cos(camAngle_horizontal + camAngle_inc_X);
-		camTarget_Z = sin(camAngle_horizontal + camAngle_inc_X);
+void joystick(unsigned int buttonmask, int x, int y, int z) {
+	// Update angle increment for both rotations
+	camAngle_inc_X = (x - camOrigin_X) * 0.001; // [Horizontal]
+	camAngle_inc_Y = (y - camOrigin_Y) * 0.001; // [Vertical]
 
-		// Update camera's orientation [Vertical]
-		camTarget_Y = sin(camAngle_vertical + camAngle_inc_Y);
+	// Update camera's orientation [Horizontal]
+	camTarget_X = sin(camAngle_horizontal + camAngle_inc_X);
+	camTarget_Z = -cos(camAngle_horizontal + camAngle_inc_X);
+
+	// Update camera's orientation [Vertical]
+	camTarget_Y = -sin(camAngle_vertical + camAngle_inc_Y);
+
+	if (buttonmask & 0x01) {
+		glMatrixMode(GL_PROJECTION);
+		glTranslatef(0.0, 0.0, camInc_Z);
+		glTranslatef(camInc_X, 0.0, 0.0);
 	}
+
+	if (buttonmask & 0x02) {
+		glMatrixMode(GL_PROJECTION);
+		glTranslatef(0.0, 0.0, -camInc_Z);
+		glTranslatef(-camInc_X, 0.0, 0.0);
+	}
+
+	if (buttonmask & 0x04){
+		glMatrixMode(GL_PROJECTION);
+		glTranslatef(0.0, 0.0, -camInc_Z);
+		glTranslatef(camInc_X, 0.0, 0.0);
+	
+	}
+
+	if (buttonmask & 0x08) {
+		glMatrixMode(GL_PROJECTION);
+		glTranslatef(0.0, 0.0, camInc_Z);
+		glTranslatef(-camInc_X, 0.0, 0.0);
+	}
+
+	if (buttonmask & 0x10) {
+		glMatrixMode(GL_PROJECTION);
+		glRotatef(0.5, 0.0, 1.0, 0.0);
+	}
+
+	if (buttonmask & 0x20) {
+		
+	}
+
+	if (buttonmask & 0x40) {
+
+	}
+
+
+	if (buttonmask & 0x80) {
+		glMatrixMode(GL_PROJECTION);
+		glRotatef(-0.5, 0.0, 1.0, 0.0);
+	}
+
 }
 
 int main(int argc, char** argv){
@@ -244,7 +324,6 @@ int main(int argc, char** argv){
 	k = 0;
 
 	/******************************* GLUI ******************************************/
-	/*
 	GLUI *glui = GLUI_Master.create_glui("Controls");
 	GLUI_Panel *collection_panel = glui->add_panel("Collection properties");
 	
@@ -263,9 +342,7 @@ int main(int argc, char** argv){
 	glui->add_separator();
 	glui->add_button("  Run  ");
 	glui->add_separator();
-	*/
 	/*******************************************************************************/
-
 
 	// Register callback functions
 	glutDisplayFunc(display);
@@ -274,6 +351,7 @@ int main(int argc, char** argv){
 	glutMouseFunc(mouse);
 	glutMotionFunc(mouseMove);
 	glutSpecialFunc(processSpecialKeys);
+	glutJoystickFunc(joystick, 25);
 	glutIdleFunc(display);
 
 	init();

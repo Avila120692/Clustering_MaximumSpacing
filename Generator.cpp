@@ -53,7 +53,7 @@ int Generator::randomPosition_Z(bool mult_generator){
 	int x0, posZ;
 	x0 = rand() % 6 + 1;
 
-	// posz = mult_generator ? mcg( m, a, c, x0) : lcg( m, a, x0);
+	//posz = mult_generator ? mcg( m, a, c, x0) : lcg( m, a, x0);
 	posZ = x0; // We temporally use the value of x0
 	cout << "\nposition_Z: " << posZ;
 
@@ -86,10 +86,10 @@ vector<Vertex> Generator::generateVertices(int numVertices, bool mult){
 	vertexList.insert(vertexList.end(), Vertex(1.0, 1.0, 5.0));
 	vertexList.insert(vertexList.end(), Vertex(3.0, 3.0, 3.0));
 	
-	/* Others vertices
+	// Others vertices
 	for (int i = 0; i < numVertices; i++)
 		vertexList.insert(vertexList.end(), Vertex(randomPosition_X(mult), randomPosition_Y(mult), randomPosition_Z(mult)));
-	*/
+	
 	
 	// Return full-filled collection of vertices
 	return vertexList;
@@ -107,8 +107,9 @@ vector<Edge> Generator::generateEdges(vector<Vertex> vertices, int numEdges, boo
 	edges.insert(edges.end(), Edge(2, 3, distance(vertices.at(2), vertices.at(3))));
 	edges.insert(edges.end(), Edge(3, 4, distance(vertices.at(3), vertices.at(4))));
 
-	/* Others edges
-	//for (int i = 0; i < numEdges; i++){
+	// Others edges
+	/*
+	for (int i = 0; i < numEdges; i++){
 		src = randomEdge(mult, numEdges);
 		dst = randomEdge(mult, numEdges);
 
@@ -116,8 +117,8 @@ vector<Edge> Generator::generateEdges(vector<Vertex> vertices, int numEdges, boo
 			edge2 = randomEdge(mult);
 
 		edgeList.insert(edgeList.end(), Edge(src, dst, distance(vertices.at(src-1), vertices.at(dest-1))));
-	}
-	*/
+	}*/
+	
 
 	return edges;
 }
