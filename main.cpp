@@ -47,7 +47,8 @@ vector<Edge> edges;
 vector<int> clusters;
 
 // Light, shadows
-GLfloat glow_intensity;
+GLfloat glow_intensity = 0.0;
+bool glow_limit = false;
 
 void init(void){
 
@@ -87,9 +88,6 @@ void init(void){
 	graph = new Graph(vertices, edges);
 	graph->printData();
 
-	// Light, shadows
-	glow_intensity = 1.0;
-
 	/******************************************************************************************/
 }
 
@@ -110,22 +108,31 @@ void display(void){
 	// Draw enviroment (axis, reference frame)
 	helper->drawGraphicEnviroment();
 
+	/********************************** EMISSIVE LIGHT *******************************************/
+	if (glow_limit)
+		glow_intensity += 0.001;
+	else
+		glow_intensity -= 0.001;
+
+
+	if (glow_intensity <= 0)
+		glow_limit = true;
+	else if (glow_intensity >= 1)
+		glow_limit = false;
 	/********************************** GRAPH *******************************************/
-	if (graph->vertices.at(0).mat_emissive[0] <= 0 )
-		graph->vertices.at(0).mat_emissive[0] += 0.5;
-	else if (graph->vertices.at(0).mat_emissive[0] >= 1.0)
-		graph->vertices.at(0).mat_emissive[0] -= 0.5;
 
 	// Draw graph
 	graph->drawVertices();
+	
+	for (int i = 0; i < graph->vertices.size(); i++)
+		graph->vertices.at(i).setEmission(glow_intensity, 0.0, 0.0);
 
 	if (show_edges)
 		graph->drawEdges();
 
 	if (clustering_executed)
 		graph->drawClusterEdges();
-
-
+	
 	// Swaps the buffers of the current window if double buffered
 	glFlush();
 	glutSwapBuffers();
@@ -161,8 +168,10 @@ void keyboard(unsigned char key, int x, int y){
 		clustering_executed =  !clustering_executed;
 		
 		// Modify material for each vertex in function of its resulting cluster's belongness
-		for (int i = 0; i < graph->vertices.size(); i++)
+		for (int i = 0; i < graph->vertices.size(); i++){
 			graph->vertices.at(i).setMaterial(1.0, clusters.at(i), 0.4);
+			graph->vertices.at(i).setEmission(0.0, 0.0, glow_intensity);
+		}
 
 		break;
 	case 'h': case	'H':
@@ -175,6 +184,12 @@ void keyboard(unsigned char key, int x, int y){
 	case 'p': case 'P':
 		if (camPosition_Y >= 2.0)
 			camPosition_Y -= camInc_Y;
+		break;
+	case 'y': case 'Y':
+		graph->vertices.at(0).setPosition(graph->vertices.at(0).getPosition_X() + 0.02, 0.0, 0.0);
+		break;
+	case 'u': case 'U':
+		graph->vertices.at(0).setPosition(graph->vertices.at(0).getPosition_X() - 0.02, 0.0, 0.0);
 		break;
 	case 0x1B:case 'q':case 'Q':
 		exit(0);

@@ -107,6 +107,22 @@ vector<Edge> Generator::generateEdges(vector<Vertex> vertices, int numEdges, boo
 	edges.insert(edges.end(), Edge(2, 3, distance(vertices.at(2), vertices.at(3))));
 	edges.insert(edges.end(), Edge(3, 4, distance(vertices.at(3), vertices.at(4))));
 
+	/*
+	edges.insert(edges.end(), Edge(0, 1, distance(vertices.at(0), vertices.at(1))));
+	edges.insert(edges.end(), Edge(0, 2, distance(vertices.at(0), vertices.at(2))));
+	edges.insert(edges.end(), Edge(0, 3, distance(vertices.at(0), vertices.at(3))));
+	edges.insert(edges.end(), Edge(0, 4, distance(vertices.at(0), vertices.at(4))));
+
+	edges.insert(edges.end(), Edge(1, 2, distance(vertices.at(1), vertices.at(2))));
+	edges.insert(edges.end(), Edge(1, 3, distance(vertices.at(1), vertices.at(3))));
+	edges.insert(edges.end(), Edge(1, 4, distance(vertices.at(1), vertices.at(4))));
+
+	edges.insert(edges.end(), Edge(2, 3, distance(vertices.at(2), vertices.at(3))));
+	edges.insert(edges.end(), Edge(2, 4, distance(vertices.at(2), vertices.at(4))));
+
+	edges.insert(edges.end(), Edge(3, 4, distance(vertices.at(3), vertices.at(4))));
+	*/
+
 	// Others edges
 	/*
 	for (int i = 0; i < numEdges; i++){

@@ -30,7 +30,7 @@ Vertex::Vertex(float x, float y, float z){
 	// Shiness
 	this->mat_shininess[0] = 0.6 * 128; // phong exponent
 	// Emmisive
-	this->mat_emissive[0] = 1.0;
+	this->mat_emissive[0] = 0.0;
 	this->mat_emissive[1] = 0.0;
 	this->mat_emissive[2] = 0.0;
 	this->mat_emissive[3] = 1.0;
@@ -51,6 +51,19 @@ void Vertex::setMaterial(float MatEnv_R, float MatEnv_G, float MatEnv_B){
 	this->mat_ambient[1] = (GLfloat) MatEnv_G;
 	this->mat_ambient[2] = (GLfloat) MatEnv_B;
 	this->mat_ambient[3] = 1.0;
+}
+
+// Ser parameter for emissive light
+void Vertex::setEmission(float glow_R, float glow_G, float glow_B){
+	this->mat_emissive[0] = (GLfloat) glow_R;
+	this->mat_emissive[1] = (GLfloat) glow_G;
+	this->mat_emissive[2] = (GLfloat) glow_B;
+	this->mat_emissive[3] = 1.0;
+}
+
+// Return position X of vertex
+float Vertex::getPosition_X(){
+	return this->x;
 }
 
 // Draw the node with a predefined body (Wire sphere)

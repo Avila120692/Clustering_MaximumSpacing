@@ -23,6 +23,8 @@ public:
 
 	void setPosition(float x, float y, float z);
 	void setMaterial(float R, float G, float B);
+	void setEmission(float glow_R, float glow_G, float glow_B);
+	float getPosition_X();
 	void draw();
 };
 
