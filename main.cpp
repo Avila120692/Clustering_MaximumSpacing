@@ -169,6 +169,7 @@ void keyboard(unsigned char key, int x, int y){
 		
 		// Modify material for each vertex in function of its resulting cluster's belongness
 		for (int i = 0; i < graph->vertices.size(); i++){
+			cout << "\nVertex[" << i << "] belongs to cluster: " << clusters.at(i);
 			graph->vertices.at(i).setMaterial(1.0, clusters.at(i), 0.4);
 			graph->vertices.at(i).setEmission(0.0, 0.0, glow_intensity);
 		}
